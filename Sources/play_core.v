@@ -167,6 +167,13 @@ module play_core #(
         { write_y, 6'b000000 } + { write_y, 3'b000 } + 
         { write_y, 1'b0 } + write_y;
 
+    // @ 01-12-2024, bug:
+    // when extending the tail of snake a,
+    // the tail run through the body of it
+    //
+    // @ 01-12-2024, code review:
+    // say state A => B => C, then the rdata of C
+    // is related to the waddr of A, not B
     always @( posedge clk ) begin
         case ( state )
             GAME_OVER: begin
